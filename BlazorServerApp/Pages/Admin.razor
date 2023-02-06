@@ -8,47 +8,47 @@
 
 <div class="container">
     <section id="avail-appt-section">
-        <h3>Currently Available Resources</h3>
+        <h3>Curent Available Resources</h3>
         @if (availableResources == null)
         {
-            <p><em>Loading ...</em></p>
+                <p><em>Loading ...</em></p>
         }
         else
         {
-            <table class="table table-striped">
-                <thead style="background-color:#141e5e; color:white;">
-                    <tr>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Reserved</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
+                <table class="table table-striped">
+                    <thead style="background-color:#141e5e; color:white;">
+                        <tr>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Reserved</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     @foreach (var a in availableResources)
                     {
-                        <tr>
-                            <td>@a.StartTime.ToLocalTime()</td>
-                            <td>@a.EndTime.ToLocalTime()</td>
-                            <td>@a.Reserved</td>
-                            <td>
+                                <tr>
+                                    <td>@a.StartTime.ToLocalTime()</td>
+                                    <td>@a.EndTime.ToLocalTime()</td>
+                                    <td>@a.Reserved</td>
+                                    <td>
                                 @if (@a.Reserved == false)
                                 {
-                                    <span id="deleteAppt" @onclick="() => DeleteResource(a.Id)" class="oi oi-x me-3"></span>
-                                    <span id="editAppt" @onclick="() => EditResource(a.Id)" class="oi oi-pencil"></span>
+                                                <span id="deleteRsrc" @onclick="() => DeleteResource(a.Id)" class="oi oi-x me-3"></span>
+                                                <span id="editRsrc" @onclick="() => EditResource(a.Id)" class="oi oi-pencil"></span>
                                 }
-                            </td>
-                        </tr>
+                                    </td>
+                                </tr>
 
                     }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
             @if (deleteErrorMessage)
             {
-                <div class="alert alert-danger" role="alert">
-                    Delete Action Failed!
-                </div>
-                <p>@dbErrorMessage</p>
+                        <div class="alert alert-danger" role="alert">
+                          Delete Action Failed!
+                        </div>
+                        <p>@dbErrorMessage</p>
 
 
             }
@@ -58,64 +58,64 @@
     <section id="create-appt" class="mt-5">
         @if (createStatus)
         {
-            <h3>Add New Resource</h3>
-            <EditForm Model="@newResource" OnValidSubmit="@InsertResource">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <div class="mb-3">
-                    <label for="date" class="form-label">Date</label>
-                    <input type="date" class="form-control" id="date" @bind-value="addResource.Date">
-                </div>
-                <div class="mb-3">
-                    <label for="start-time" class="form-label">Start Time</label>
-                    <input type="time" class="form-control" id="start-time" @bind-value="addResource.StartTime">
-                </div>
-                <div class="mb-3">
-                    <label for="end-time" class="form-label">End Time</label>
-                    <input type="time" class="form-control" id="end-time" @bind-value="addResource.EndTime">
-                </div>
+                <h3>Add New Available Resource</h3>
+                <EditForm Model="@newResource" OnValidSubmit="@InsertAppointment">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="date" @bind-value="addResource.Date">
+                    </div>
+                    <div class="mb-3">
+                        <label for="start-time" class="form-label">Start Time</label>
+                        <input type="time" class="form-control" id="start-time" @bind-value="addResource.StartTime">
+                    </div>
+                    <div class="mb-3">
+                        <label for="end-time" class="form-label">End Time</label>
+                        <input type="time" class="form-control" id="end-time" @bind-value="addResource.EndTime">
+                    </div>
 
-                <div class="d-grid gap-2">
-                    <button type="submit" class="btn alert-primary mt-3">Add</button>
-                </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn alert-primary mt-3">Add</button>
+                    </div>
 
-            </EditForm>
+                </EditForm>
         }
     </section>
 
     <section id="edit-appt" class="mt-5">
         @if (editStatus)
         {
-            <h3>Edit Existing Resources</h3>
-            <EditForm Model="@newResource" OnValidSubmit="@UpdateResource">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <div class="mb-3">
-                    <label for="date" class="form-label">Date</label>
-                    <input type="date" class="form-control" id="date" @bind-value="addResource.Date">
-                </div>
-                <div class="mb-3">
-                    <label for="start-time" class="form-label">Start Time</label>
-                    <input type="time" class="form-control" id="start-time" @bind-value="addResource.StartTime">
-                </div>
-                <div class="mb-3">
-                    <label for="end-time" class="form-label">End Time</label>
-                    <input type="time" class="form-control" id="end-time" @bind-value="addResource.EndTime">
-                </div>
+                <h3>Edit Existing Available Resource</h3>
+                <EditForm Model="@newResource" OnValidSubmit="@UpdateResource">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="date" @bind-value="addResource.Date">
+                    </div>
+                    <div class="mb-3">
+                        <label for="start-time" class="form-label">Start Time</label>
+                        <input type="time" class="form-control" id="start-time" @bind-value="addResource.StartTime">
+                    </div>
+                    <div class="mb-3">
+                        <label for="end-time" class="form-label">End Time</label>
+                        <input type="time" class="form-control" id="end-time" @bind-value="addResource.EndTime">
+                    </div>
 
-                <div class="d-grid gap-2">
-                    <button type="submit" class="btn alert-primary mt-3">Update</button>
-                </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn alert-primary mt-3">Update</button>
+                    </div>
 
-            </EditForm>
+                </EditForm>
 
         }
     </section>
 </div>
 
 @code {
-    List<AvailableResourceModel> availableResources;
-    List<AvailableResourceModel> thisResource;
+    List<AvailableResourceModel>? availableResources;
+    List<AvailableResourceModel>? thisResource;
 
     private AvailableResourceModel newResource = new AvailableResourceModel();
 
@@ -132,14 +132,14 @@
     int apptBeingEdited;
 
 
-    public class AddAppointment
+    public class AddResource
     {
         public DateTime Date { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
     }
 
-    private AddAppointment addResource = new AddAppointment();
+    private AddResource addResource = new AddResource();
 
     // Load the initial data
     protected override async Task OnInitializedAsync()
@@ -149,7 +149,7 @@
     }
 
     // Insert Resources
-    private async Task InsertResource()
+    private async Task InsertAppointment()
     {
         AvailableResourceModel a = new AvailableResourceModel
             {
@@ -166,7 +166,7 @@
         await _data.SaveData(sql, a, _config.GetConnectionString("MySqlConnection"));
         await OnInitializedAsync();
         a = new AvailableResourceModel();
-        addResource = new AddAppointment();
+        addResource = new AddResource();
     }
 
     // Delete Resource
@@ -193,12 +193,12 @@
         editStatus = true;
 
         string sql = "SELECT * FROM available_resource WHERE Id = @Id";
-        thisAppointment = await _data.LoadData<AvailableResourceModel, dynamic>(sql, new { Id = id }, _config.GetConnectionString("MySqlConnection"));
+        thisResource = await _data.LoadData<AvailableResourceModel, dynamic>(sql, new { Id = id }, _config.GetConnectionString("MySqlConnection"));
         apptBeingEdited = id;
 
-        addResource.StartTime = thisAppointment[0].StartTime.ToLocalTime();
-        addResource.EndTime = thisAppointment[0].EndTime.ToLocalTime();
-        addResource.Date = thisAppointment[0].StartDate;
+        addResource.StartTime = thisResource[0].StartTime.ToLocalTime();
+        addResource.EndTime = thisResource[0].EndTime.ToLocalTime();
+        addResource.Date = thisResource[0].StartDate;
     }
 
     // Update Resource
